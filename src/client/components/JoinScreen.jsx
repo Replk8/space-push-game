@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * JoinScreen - UI for entering name and joining the game
@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 export default function JoinScreen({ onJoin, connected, playerCount = 0, maxPlayers = 40, joinError }) {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
+  const inputRef = useRef(null);
 
   // Update error if join error received from server
   useEffect(() => {
@@ -37,6 +38,13 @@ export default function JoinScreen({ onJoin, connected, playerCount = 0, maxPlay
 
     setError('');
     onJoin(trimmedName);
+  };
+
+  // Handle tap on input container to focus input (iOS fix)
+  const handleInputContainerClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -81,17 +89,28 @@ export default function JoinScreen({ onJoin, connected, playerCount = 0, maxPlay
 
           {/* Join form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            <div 
+              onClick={handleInputContainerClick}
+              onTouchEnd={handleInputContainerClick}
+              className="touch-manipulation"
+            >
               <input
+                ref={inputRef}
                 type="text"
+                inputMode="text"
+                autoComplete="name"
+                autoCapitalize="words"
+                autoCorrect="off"
+                enterKeyHint="go"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your name"
                 maxLength={20}
                 disabled={!connected}
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg
-                  text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan
-                  disabled:opacity-50 disabled:cursor-not-allowed"
+                  text-white text-base placeholder-gray-500 focus:outline-none focus:border-neon-cyan
+                  disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+                style={{ fontSize: '16px' }} /* Prevents iOS zoom on focus */
               />
               {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
             </div>
@@ -102,7 +121,7 @@ export default function JoinScreen({ onJoin, connected, playerCount = 0, maxPlay
               className="w-full py-3 bg-gradient-to-r from-neon-cyan to-neon-magenta
                 text-white font-bold rounded-lg transition-all duration-200
                 hover:opacity-90 hover:shadow-lg hover:shadow-neon-cyan/20
-                disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             >
               {isFull ? 'SERVER FULL' : 'JOIN GAME'}
             </button>
@@ -110,8 +129,7 @@ export default function JoinScreen({ onJoin, connected, playerCount = 0, maxPlay
 
           {/* Controls hint */}
           <div className="mt-6 text-center text-sm text-gray-500">
-            <p>Arrow Keys or WASD to move</p>
-            <p>SPACE to boost</p>
+            <p>Drag to move • Tap to boost</p>
           </div>
         </div>
       </div>
