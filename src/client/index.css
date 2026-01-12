@@ -6,23 +6,32 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html {
   margin: 0;
   padding: 0;
   background-color: #0a0a1a;
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
   height: 100%;
-  /* Prevent pull-to-refresh and overscroll on iOS */
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
 }
 
-/* Prevent text selection during gameplay */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a1a;
+  min-height: 100%;
+  /* Prevent pull-to-refresh */
+  overscroll-behavior-y: none;
+}
+
+/* Prevent text selection during gameplay - but allow in inputs */
 body {
   user-select: none;
   -webkit-user-select: none;
+}
+
+/* Allow text selection in inputs */
+input, textarea {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /* Game canvas container - prevent all default touch behaviors */
@@ -33,12 +42,24 @@ canvas {
 
 /* iOS Safari viewport fix */
 @supports (-webkit-touch-callout: none) {
-  body {
+  html {
     height: -webkit-fill-available;
+  }
+  body {
+    min-height: -webkit-fill-available;
   }
 }
 
-/* Touch manipulation for buttons */
+/* Touch manipulation for buttons and inputs */
 .touch-manipulation {
   touch-action: manipulation;
+}
+
+/* Ensure inputs are tappable on iOS */
+input[type="text"] {
+  font-size: 16px !important; /* Prevents iOS zoom */
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.5rem;
 }
