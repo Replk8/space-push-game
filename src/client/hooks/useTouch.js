@@ -34,7 +34,7 @@ export default function useTouch(keysRef, onBoostTap) {
   const touchStartRef = useRef(null);
   const touchStartTimeRef = useRef(null);
   const isDraggingRef = useRef(false);
-  const activeDirectionRef = useRef({ forward: false, backward: false, left: false, right: false });
+  const activeDirectionRef = useRef({ up: false, down: false, left: false, right: false });
 
   // Clear directional input that was set by touch controls
   // Only clears keys that touch was actively controlling to avoid stomping keyboard state
