@@ -1,0 +1,246 @@
+{
+  "feature": "SPACE PUSH - 3D Multiplayer Zero Gravity Arena",
+  "description": "40-player 3D browser game where astronauts push each other off a floating platform in space",
+  "max_players": 40,
+  "stories": [
+    {
+      "id": 1,
+      "title": "Initialize project with package.json and dependencies",
+      "criteria": [
+        "package.json exists with project name space-push-game",
+        "Dependencies include: express, socket.io, three, @react-three/fiber, @react-three/drei, cannon-es",
+        "Scripts include: dev, build, start",
+        "Node.js server entry point defined"
+      ],
+      "passes": true
+    },
+    {
+      "id": 2,
+      "title": "Create Express server with Socket.io",
+      "criteria": [
+        "src/server/index.js exists",
+        "Express server listens on port 3000",
+        "Socket.io attached to server",
+        "Basic connection/disconnection logging works",
+        "Serves static files from public folder"
+      ],
+      "passes": true
+    },
+    {
+      "id": 3,
+      "title": "Create React frontend scaffold with Vite",
+      "criteria": [
+        "Vite config exists for React",
+        "src/client/main.jsx entry point exists",
+        "src/client/App.jsx component exists",
+        "index.html exists in public folder",
+        "Tailwind CSS configured"
+      ],
+      "passes": true
+    },
+    {
+      "id": 4,
+      "title": "Set up Three.js scene with space background",
+      "criteria": [
+        "React Three Fiber Canvas renders",
+        "Space background with stars visible",
+        "Ambient and directional lighting configured",
+        "Camera positioned to view arena",
+        "Scene renders without errors"
+      ],
+      "passes": true
+    },
+    {
+      "id": 5,
+      "title": "Create glowing neon platform",
+      "criteria": [
+        "Hexagonal or circular platform mesh exists",
+        "Platform has glowing neon edge effect",
+        "Platform floats in center of scene",
+        "Platform has grid or hex pattern texture",
+        "Platform is visible from camera angle"
+      ],
+      "passes": true
+    },
+    {
+      "id": 6,
+      "title": "Create astronaut player model",
+      "criteria": [
+        "Player represented as glowing sphere or capsule",
+        "Player has colored glow/emissive material",
+        "Player name label floats above",
+        "Multiple players can render with different colors",
+        "Player model is visually distinct against space background"
+      ],
+      "passes": true
+    },
+    {
+      "id": 7,
+      "title": "Implement player movement with arrow keys",
+      "criteria": [
+        "Arrow keys (up/down/left/right) move player",
+        "Movement feels floaty (zero-G style)",
+        "Player stays on platform initially",
+        "Movement is smooth, not jerky",
+        "Keyboard input captured correctly"
+      ],
+      "passes": true
+    },
+    {
+      "id": 8,
+      "title": "Implement boost/dash mechanic with spacebar",
+      "criteria": [
+        "Spacebar triggers boost in current direction",
+        "Boost has cooldown (1-2 seconds)",
+        "Visual effect on boost (flame trail or burst)",
+        "Boost increases velocity significantly",
+        "Cooldown indicator shown to player"
+      ],
+      "passes": true
+    },
+    {
+      "id": 9,
+      "title": "Add physics with collision and momentum",
+      "criteria": [
+        "Cannon-es physics world initialized",
+        "Players have physics bodies",
+        "Players collide and push each other",
+        "Momentum transfers on collision",
+        "Platform has static physics body"
+      ],
+      "passes": true
+    },
+    {
+      "id": 10,
+      "title": "Implement WebSocket player synchronization",
+      "criteria": [
+        "Player positions sync across all clients",
+        "New players appear for existing players",
+        "Disconnected players are removed",
+        "Position updates are smooth (interpolation)",
+        "Server is authoritative for game state"
+      ],
+      "passes": true
+    },
+    {
+      "id": 11,
+      "title": "Create join screen with name input",
+      "criteria": [
+        "Join screen displays on load",
+        "Text input for player name",
+        "JOIN button to enter lobby",
+        "Player count shown (X / 40 players)",
+        "Name is sent to server on join"
+      ],
+      "passes": true
+    },
+    {
+      "id": 12,
+      "title": "Create lobby waiting room",
+      "criteria": [
+        "Lobby shows all joined player names",
+        "New players appear in real-time",
+        "Message shows: Waiting for host to start",
+        "Players cannot move yet",
+        "Lobby is visually styled (space theme)"
+      ],
+      "passes": true
+    },
+    {
+      "id": 13,
+      "title": "First player becomes host with game controls",
+      "criteria": [
+        "First player to join is automatically designated as host",
+        "Host sees START GAME button in lobby",
+        "Regular players see 'Waiting for host to start' message",
+        "If host disconnects, next player becomes new host",
+        "Host indicator shown (crown icon or 'HOST' label)"
+      ],
+      "passes": true
+    },
+    {
+      "id": 14,
+      "title": "Implement game state management",
+      "criteria": [
+        "Game states: lobby, countdown, playing, ended",
+        "Countdown (3-2-1) displays before game starts",
+        "State transitions broadcast to all clients",
+        "UI updates based on current state",
+        "Players can only move during playing state"
+      ],
+      "passes": true
+    },
+    {
+      "id": 15,
+      "title": "Implement platform shrinking mechanic",
+      "criteria": [
+        "Platform shrinks every 30 seconds",
+        "Warning visual before shrink (edge glows red)",
+        "Shrink animation is smooth",
+        "Physics boundary updates with platform size",
+        "At least 3 shrink stages before minimum size"
+      ],
+      "passes": true
+    },
+    {
+      "id": 16,
+      "title": "Implement elimination detection",
+      "criteria": [
+        "Player falling below platform triggers elimination",
+        "Eliminated player sees Game Over screen",
+        "Other players see elimination animation",
+        "Eliminated player can spectate",
+        "Player count updates on elimination"
+      ],
+      "passes": true
+    },
+    {
+      "id": 17,
+      "title": "Create victory screen",
+      "criteria": [
+        "Victory screen shows when 1 player remains",
+        "Winner name displayed prominently",
+        "Confetti or particle celebration effect",
+        "PLAY AGAIN button for host",
+        "All clients see victory screen"
+      ],
+      "passes": true
+    },
+    {
+      "id": 18,
+      "title": "Implement secret Konami code",
+      "criteria": [
+        "Konami sequence: UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT SPACE ENTER",
+        "Successful entry triggers shockwave effect",
+        "All other players instantly eliminated",
+        "Special victory message: ALL HAIL THE KING",
+        "Code only works during playing state"
+      ],
+      "passes": true
+    },
+    {
+      "id": 19,
+      "title": "Add mobile touch controls",
+      "criteria": [
+        "Touch/drag anywhere moves player",
+        "Tap triggers boost",
+        "On-screen joystick visual (optional)",
+        "Works on iOS and Android browsers",
+        "Touch and keyboard can coexist"
+      ],
+      "passes": true
+    },
+    {
+      "id": 20,
+      "title": "Visual polish and particle effects",
+      "criteria": [
+        "Particle trail on player movement",
+        "Spark particles on collision",
+        "Explosion particles on elimination",
+        "Screen shake on big impacts",
+        "Camera slowly orbits during gameplay"
+      ],
+      "passes": true
+    }
+  ]
+}

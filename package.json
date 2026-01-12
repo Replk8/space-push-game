@@ -1,0 +1,47 @@
+{
+  "name": "space-push-game",
+  "version": "1.0.0",
+  "description": "3D multiplayer browser game where players push each other off a floating platform in space",
+  "type": "module",
+  "main": "src/server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "nodemon src/server/index.js",
+    "dev:client": "vite",
+    "build": "vite build",
+    "start": "node src/server/index.js",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "game",
+    "multiplayer",
+    "space",
+    "3d",
+    "threejs",
+    "socket.io"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^8.15.0",
+    "cannon-es": "^0.20.0",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "three": "^0.158.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^5.0.0"
+  }
+}
